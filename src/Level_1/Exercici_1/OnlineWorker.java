@@ -1,18 +1,19 @@
 package Level_1.Exercici_1;
 
-public class OnlineWorker extends Worker{
+import java.math.BigDecimal;
 
-    static final int INTERNET_PRICE = 40;
+public class OnlineWorker extends Worker {
+    private static final BigDecimal INTERNET_PRICE = new BigDecimal(40);
 
-    public OnlineWorker(String name, String surname){
+    public OnlineWorker(String name, String surname, BigDecimal pricePerHour) {
         super(name, surname, pricePerHour);
     }
 
     @Override
-    public int calculateSalary(int monthlyHoursWorked){
-        int salary;
-
-        salary = pricePerHour * monthlyHoursWorked + INTERNET_PRICE;
-        return salary;
+    public BigDecimal calculateSalary(int monthlyHoursWorked) {
+        validateHours(monthlyHoursWorked);
+        BigDecimal hours = new BigDecimal(monthlyHoursWorked);
+        return getPricePerHour().multiply(hours).add(INTERNET_PRICE);
     }
 }
+

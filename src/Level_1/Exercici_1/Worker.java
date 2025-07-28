@@ -1,18 +1,30 @@
 package Level_1.Exercici_1;
 
-public class Worker {
-     String name;
-     String surname;
-     static int pricePerHour = 12;
+import java.math.BigDecimal;
 
-    public Worker(String name, String surname, int pricePerHour){
+public abstract class Worker {
+     private String name;
+     private String surname;
+     private BigDecimal pricePerHour;
+
+    public  Worker(String name, String surname, BigDecimal pricePerHour){
         this.name = name;
         this.surname = surname;
+        this.pricePerHour = pricePerHour;
     }
 
-    public int calculateSalary(int hoursWorked){
-        int salary;
-        salary = hoursWorked * pricePerHour;
-        return salary;
+    public abstract BigDecimal calculateSalary(int monthlyHoursWorked);
+
+    protected void validateHours(int hours) {
+        if (hours < 0) {
+            throw new ExceptionInvalidHours("Hours cannot be negative");
+        }
+        if (this.pricePerHour.intValue() < 0) {
+            throw new ExceptionInvalidPrice("Price per hour cannot be negative");
+        }
+    }
+
+    protected BigDecimal getPricePerHour() {
+        return pricePerHour;
     }
 }

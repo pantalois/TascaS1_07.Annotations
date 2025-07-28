@@ -1,25 +1,24 @@
 package Level_1.Exercici_2;
-import java.util.Date;
 
-@SuppressWarnings({"deprecation", "unused"})
-public class OnSiteWorker extends Worker{
+import java.math.BigDecimal;
 
-    private static int benzina = 50;
+public class OnSiteWorker extends Worker {
 
-    public OnSiteWorker(String name, String surname){
+    private static final BigDecimal FUEL_ALLOWANCE = new BigDecimal(50);
+
+    public OnSiteWorker(String name, String surname, BigDecimal pricePerHour) {
         super(name, surname, pricePerHour);
     }
 
     @Override
-    public int calculateSalary(int monthlyHoursWorked){
-        int salary;
-
-        salary = pricePerHour * monthlyHoursWorked + benzina;
-        return salary;
+    public BigDecimal calculateSalary(int monthlyHoursWorked) {
+        validateHours(monthlyHoursWorked);
+        BigDecimal hours = new BigDecimal(monthlyHoursWorked);
+        return getPricePerHour().multiply(hours).add(FUEL_ALLOWANCE);
     }
 
-    public void getHours(){
-        Date hours = new Date();
-        System.out.println(hours.getHours());
+    @Deprecated
+    public String calculateSalaryWithoutFuel() {
+        return "This is the old method where the company did not pay the fuel of the worker";
     }
 }

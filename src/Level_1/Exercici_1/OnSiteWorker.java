@@ -1,18 +1,19 @@
 package Level_1.Exercici_1;
 
+import java.math.BigDecimal;
+
 public class OnSiteWorker extends Worker{
 
-    private static int benzina = 50;
+    private static final BigDecimal FUEL_ALLOWANCE = new BigDecimal(50);
 
-    public OnSiteWorker(String name, String surname){
+    public OnSiteWorker(String name, String surname, BigDecimal pricePerHour) {
         super(name, surname, pricePerHour);
     }
 
     @Override
-    public int calculateSalary(int monthlyHoursWorked){
-        int salary;
-
-        salary = pricePerHour * monthlyHoursWorked + benzina;
-        return salary;
+    public BigDecimal calculateSalary(int monthlyHoursWorked) {
+        validateHours(monthlyHoursWorked);
+        BigDecimal hours = new BigDecimal(monthlyHoursWorked);
+        return getPricePerHour().multiply(hours).add(FUEL_ALLOWANCE);
     }
 }

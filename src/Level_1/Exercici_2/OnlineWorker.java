@@ -1,26 +1,24 @@
 package Level_1.Exercici_2;
 
-import java.util.Date;
+import java.math.BigDecimal;
 
+public class OnlineWorker extends Worker {
+    private static final BigDecimal INTERNET_PRICE = new BigDecimal(40);
 
-@SuppressWarnings({"deprecation", "unused"})
-public class OnlineWorker extends Worker{
-
-    static final int INTERNET_PRICE = 40;
-    public OnlineWorker(String name, String surname){
+    public OnlineWorker(String name, String surname, BigDecimal pricePerHour) {
         super(name, surname, pricePerHour);
     }
 
     @Override
-    public int calculateSalary(int monthlyHoursWorked){
-        int salary;
-
-        salary = pricePerHour * monthlyHoursWorked + INTERNET_PRICE;
-        return salary;
+    public BigDecimal calculateSalary(int monthlyHoursWorked) {
+        validateHours(monthlyHoursWorked);
+        BigDecimal hours = new BigDecimal(monthlyHoursWorked);
+        return getPricePerHour().multiply(hours).add(INTERNET_PRICE);
     }
 
-    public void getDate(){
-        Date year = new Date();
-        System.out.println(year.getDate());
+    @Deprecated
+    public String calculateSalaryWithoutInternet() {
+        return "This is the old method where the company did not pay the internet of the worker";
     }
 }
+

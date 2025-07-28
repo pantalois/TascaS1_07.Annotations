@@ -15,7 +15,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 TascaS1_06.Annotations.iml
-
+.iml
 .idea
 ### NetBeans ###
 /nbproject/private/
